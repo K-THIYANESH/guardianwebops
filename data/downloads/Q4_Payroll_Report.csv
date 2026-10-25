@@ -1,0 +1,5 @@
+Employee ID,Name,Role,Department,Salary,Status
+E101,ADMIN,ADMIN,Executive,$210000,Active
+E102,EXEC,EXEC,Leadership,$190000,Active
+E103,MANAGER,MANAGER,Engineering,$145000,Active
+E104,EMPLOYEE,EMPLOYEE,Engineering,$95000,Active

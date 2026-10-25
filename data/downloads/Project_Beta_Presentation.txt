@@ -1,0 +1,6 @@
+Project Beta Slide Deck Summary
+
+Slide 1: Objectives & Key Results for Q3/Q4
+Slide 2: FileMind Content Classification Pipeline
+Slide 3: Multi-Agent Model Confinement & Role-Based Access Control
+Slide 4: Zero-Trust Security Verification Checklist

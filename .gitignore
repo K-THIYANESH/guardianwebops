@@ -1,0 +1,47 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Models and weights
+models/
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+*.onnx
+*.gguf
+*.pth
+*.h5
+
+# Database and state files
+*.sqlite
+*.sqlite3
+*.db
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/runtime_state.json
+
+# Environment and secrets
+.env
+.env.local
+*.pem
+*.key
+
+# Test and coverage caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.egg-info/

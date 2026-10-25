@@ -1,0 +1,5 @@
+# Legacy Archive Log
+Classification: INTERNAL
+Department: IT Infrastructure
+
+Archived system configuration records and legacy migration notes.

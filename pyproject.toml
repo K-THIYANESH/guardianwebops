@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "guardian-swarm"
+version = "3.0.0"
+description = "Standalone Guardian Swarm security runtime"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "flask",
+  "psutil",
+  "python-dotenv",
+  "PyJWT",
+  "cryptography",
+  "sqlalchemy",
+  "PyYAML"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["guardian_swarm*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

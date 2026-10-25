@@ -1,0 +1,20 @@
+# FileMind Category to Guardian Data Classification Mapping
+categories:
+  Documents:
+    classification: INTERNAL
+  Spreadsheets:
+    classification: CONFIDENTIAL
+  Presentations:
+    classification: INTERNAL
+  Images:
+    classification: INTERNAL
+  Archives:
+    classification: CONFIDENTIAL
+  Code:
+    classification: INTERNAL
+  Executables:
+    classification: RESTRICTED
+  Security:
+    classification: RESTRICTED
+  Unknown:
+    classification: RESTRICTED

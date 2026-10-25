@@ -1,0 +1,18 @@
+{
+  "audit_version": "2026.3",
+  "organization": "Enterprise AI OS",
+  "classification": "RESTRICTED",
+  "vault_endpoints": {
+    "primary": "https://vault.internal.corp:8200",
+    "secondary": "https://vault-backup.internal.corp:8200"
+  },
+  "security_contacts": [
+    { "name": "ADMIN", "role": "ADMIN", "email": "admin@swarm.internal" },
+    { "name": "EXEC", "role": "EXEC", "email": "exec@swarm.internal" }
+  ],
+  "enforced_policies": [
+    "ZERO_TRUST_MODEL_FILE_ACCESS",
+    "SHA256_HASH_CHAINING",
+    "STRICT_ROLE_HIERARCHY"
+  ]
+}

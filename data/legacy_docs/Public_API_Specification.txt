@@ -1,0 +1,12 @@
+Guardian Swarm V3 — Public REST API Specification
+
+Overview:
+The Guardian Swarm public API enables external integration with corporate AI services.
+
+Available Public Endpoints:
+1. GET /api/health - Returns system health metrics and component status.
+2. POST /api/auth/login - Authenticates users and generates JWT bearer tokens.
+3. GET /api/stats - Provides aggregate token usage and task execution statistics.
+
+Security Note:
+All API requests must include a valid Authorization Bearer header.

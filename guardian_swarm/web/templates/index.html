@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardian WebOps — The Trust Layer for Autonomous Web Research</title>
+    <meta name="description" content="Governed web-research application combining TinyFish public web intelligence with Guardian Swarm five-gate zero-trust governance.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=4.0.0">
+</head>
+<body class="app-body">
+    <!-- TOP NAVIGATION BAR -->
+    <header class="top-bar">
+        <div class="top-left">
+            <a href="/" class="brand">
+                <svg class="svg-icon shield-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+                <span class="brand-title">Guardian WebOps</span>
+                <span class="brand-badge">V3 Governance</span>
+            </a>
+        </div>
+
+        <div class="top-centre">
+            <div id="top-gate-pill" class="gate-status-pill all-good" title="Click to view 5-Gate Governance status">
+                <span class="status-dot"></span>
+                <span id="top-gate-label">🛡 5 Governance Gates Active</span>
+            </div>
+            <div id="provider-badge-pill" class="provider-badge-pill mock">
+                <span id="provider-indicator-dot" class="status-dot"></span>
+                <span id="provider-status-text">TinyFish: Simulated Mode</span>
+            </div>
+        </div>
+
+        <div class="top-right">
+            <div class="wallet-pill" id="wallet-pill" title="Token Budget Allocation">
+                <span>Budget:</span>
+                <strong id="top-wallet-text">10,000 / 10,000</strong>
+            </div>
+
+            <span class="role-pill role-intern" id="top-role-pill">RESEARCHER</span>
+
+            <select id="user-role-select" class="top-select-dropdown" title="Switch active session role">
+                <option value="intern_user" data-role="INTERN" data-name="INTERN" selected>Role: Intern</option>
+                <option value="employee_user" data-role="EMPLOYEE" data-name="EMPLOYEE">Role: Researcher</option>
+                <option value="manager_user" data-role="MANAGER" data-name="MANAGER">Role: Manager</option>
+                <option value="exec_user" data-role="EXEC" data-name="EXEC">Role: Executive</option>
+                <option value="admin_user" data-role="ADMIN" data-name="ADMIN">Role: Admin</option>
+            </select>
+
+            <button id="btn-open-settings" class="top-btn" title="Settings">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- APP CONTAINER -->
+    <div class="app-container">
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="history-sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-section-title">Navigation</div>
+                <nav class="sidebar-nav-list">
+                    <button class="side-nav-item active" data-view="research-workspace" id="nav-workspace">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                        </svg>
+                        <span>Research Workspace</span>
+                    </button>
+                    <button class="side-nav-item" data-view="research-results" id="nav-results">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                        <span>Research Results</span>
+                        <span class="nav-badge" id="results-count-badge">0</span>
+                    </button>
+                    <button class="side-nav-item" data-view="governance-decisions" id="nav-governance">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        <span>Governance & Gates</span>
+                    </button>
+                    <button class="side-nav-item" data-view="audit-trail" id="nav-audit">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                        </svg>
+                        <span>Audit Trail</span>
+                    </button>
+                    <button class="side-nav-item" data-view="settings-policies" id="nav-settings">
+                        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <span>Settings & Policies</span>
+                    </button>
+                </nav>
+            </div>
+
+            <div style="font-size: 11px; color: var(--text-muted); padding: 0.5rem 0.75rem; border-top: 1px solid var(--border-color);">
+                Guardian WebOps v3.1<br>
+                <span>Team: CODE FREAKS</span>
+            </div>
+        </aside>
+
+        <!-- CENTER WORKSPACE AREA -->
+        <main class="center-main-area">
+
+            <!-- SECTION 1: RESEARCH WORKSPACE -->
+            <section id="view-research-workspace" class="main-view active">
+                <div class="view-header">
+                    <h1>Autonomous Web Research Workspace</h1>
+                    <p>Submit governed web-research tasks routed through TinyFish and validated by the Guardian Swarm 5-gate pipeline.</p>
+                </div>
+
+                <div class="workspace-grid">
+                    <!-- TASK FORM -->
+                    <div class="card">
+                        <div class="card-title">
+                            <span>New Research Task</span>
+                            <span class="badge badge-unverified" id="form-provider-pill">TinyFish Provider</span>
+                        </div>
+
+                        <form id="research-task-form">
+                            <div class="form-group">
+                                <label class="form-label">Research Objective</label>
+                                <textarea id="task-objective" class="form-textarea" placeholder="e.g. Compare three project-management vendors using their publicly available security and privacy information.">Compare project-management vendors (Jira, Linear, ClickUp) using their publicly available security and privacy information.</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Vendors & Target Domains</label>
+                                <div id="vendor-rows-container">
+                                    <div class="vendor-input-row">
+                                        <input type="text" class="form-input vendor-name" placeholder="Vendor" value="Jira">
+                                        <input type="text" class="form-input vendor-domain" placeholder="Domain (e.g. atlassian.com)" value="atlassian.com">
+                                        <button type="button" class="btn btn-secondary remove-vendor-btn" title="Remove">&times;</button>
+                                    </div>
+                                    <div class="vendor-input-row">
+                                        <input type="text" class="form-input vendor-name" placeholder="Vendor" value="Linear">
+                                        <input type="text" class="form-input vendor-domain" placeholder="Domain (e.g. linear.app)" value="linear.app">
+                                        <button type="button" class="btn btn-secondary remove-vendor-btn" title="Remove">&times;</button>
+                                    </div>
+                                    <div class="vendor-input-row">
+                                        <input type="text" class="form-input vendor-name" placeholder="Vendor" value="ClickUp">
+                                        <input type="text" class="form-input vendor-domain" placeholder="Domain (e.g. clickup.com)" value="clickup.com">
+                                        <button type="button" class="btn btn-secondary remove-vendor-btn" title="Remove">&times;</button>
+                                    </div>
+                                </div>
+                                <button type="button" id="btn-add-vendor" class="btn btn-secondary" style="margin-top: 6px; font-size: 12px; padding: 4px 8px;">
+                                    + Add Vendor
+                                </button>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Supported Compliance Scopes</label>
+                                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                                    <label style="font-size:12px; display:flex; align-items:center; gap:4px;">
+                                        <input type="checkbox" name="scope-cat" value="SOC 2 & Compliance" checked> SOC 2 & Compliance
+                                    </label>
+                                    <label style="font-size:12px; display:flex; align-items:center; gap:4px;">
+                                        <input type="checkbox" name="scope-cat" value="Data Encryption & Residency" checked> Data Encryption & Residency
+                                    </label>
+                                    <label style="font-size:12px; display:flex; align-items:center; gap:4px;">
+                                        <input type="checkbox" name="scope-cat" value="Access Controls & SSO" checked> Access Controls & SSO
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.25rem;">
+                                <div style="font-size:12px; color:var(--text-muted);" id="preflight-status">
+                                    Ready to evaluate 5-gate policy controls.
+                                </div>
+                                <button type="submit" id="btn-submit-research" class="btn btn-primary">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 3 19 12 5 21 5 3"/>
+                                    </svg>
+                                    Run Governed Research
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- POLICY & BOUNDARY OVERVIEW -->
+                    <div>
+                        <div class="card">
+                            <div class="card-title">Governance Boundary Overview</div>
+                            <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:1rem;">
+                                <strong>TinyFish</strong> conducts live public web research and content retrieval. 
+                                <strong>Guardian Swarm</strong> confines permitted domains, enforces role authorization, scans for sensitive targets, and checks budgets before queries execute.
+                            </p>
+                            <div class="gate-card-grid" style="grid-template-columns: 1fr;">
+                                <div class="gate-card passed">
+                                    <div class="gate-header">
+                                        <span>Gate 1: Access Control (RBAC)</span>
+                                        <span class="badge badge-found">Active</span>
+                                    </div>
+                                    <div class="gate-details">Checks user permission to spawn research agents.</div>
+                                </div>
+                                <div class="gate-card passed">
+                                    <div class="gate-header">
+                                        <span>Gate 2: Tool Confinement</span>
+                                        <span class="badge badge-found">Active</span>
+                                    </div>
+                                    <div class="gate-details">Restricts execution to web research tools; denies file write or system shell.</div>
+                                </div>
+                                <div class="gate-card passed">
+                                    <div class="gate-header">
+                                        <span>Gate 3: Privacy & Classification</span>
+                                        <span class="badge badge-found">Active</span>
+                                    </div>
+                                    <div class="gate-details">Validates public scope; ensures prompt does not leak corporate PII.</div>
+                                </div>
+                                <div class="gate-card passed">
+                                    <div class="gate-header">
+                                        <span>Gate 4: Budget Guardrails</span>
+                                        <span class="badge badge-found">Active</span>
+                                    </div>
+                                    <div class="gate-details">Calculates pre-flight token & query allowances before execution.</div>
+                                </div>
+                                <div class="gate-card passed">
+                                    <div class="gate-header">
+                                        <span>Gate 5: Safety & Audit</span>
+                                        <span class="badge badge-found">Active</span>
+                                    </div>
+                                    <div class="gate-details">Blocks high-risk internal targets; registers SHA-256 tamper-evident audit block.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: RESEARCH RESULTS -->
+            <section id="view-research-results" class="main-view">
+                <div class="view-header">
+                    <h1>Evidence & Research Findings</h1>
+                    <p>Inspecting structured vendor comparisons with source references and evidence status indicators.</p>
+                </div>
+
+                <div id="results-empty-state" class="card" style="text-align:center; padding:3rem 1rem;">
+                    <div style="font-size:2rem; margin-bottom:0.5rem;">🔎</div>
+                    <div style="font-weight:600; font-size:1.1rem; color:var(--text-primary); margin-bottom:0.25rem;">No research results yet</div>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">Run a comparison workflow from the Research Workspace to view structured findings.</p>
+                    <button class="btn btn-primary" onclick="window.switchTab('research-workspace')">Go to Workspace</button>
+                </div>
+
+                <div id="results-active-container" class="hidden">
+                    <div class="card">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                            <div>
+                                <h3 id="report-task-title" style="font-size:1.1rem; font-weight:700; color:var(--text-primary);">Vendor Security Comparison</h3>
+                                <div id="report-task-meta" style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Task ID: - · Completed: -</div>
+                            </div>
+                            <div style="display:flex; gap:0.5rem; align-items:center;">
+                                <span id="report-status-badge" class="badge badge-found">COMPLETED</span>
+                                <span id="report-provider-badge" class="badge badge-unverified">TinyFish Mock</span>
+                            </div>
+                        </div>
+
+                        <!-- VENDOR COMPARISON TABLE -->
+                        <div class="evidence-table-container">
+                            <table class="evidence-table" id="evidence-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 180px;">Scope / Category</th>
+                                        <th style="width: 220px;">Vendor & Domain</th>
+                                        <th>Finding / Claim</th>
+                                        <th style="width: 140px;">Status</th>
+                                        <th style="width: 280px;">Source Evidence & Excerpt</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="evidence-table-body">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- UNCERTAINTY & MISSING INFO BANNER -->
+                        <div class="card" style="background:#f8fafc; border:1px solid #e2e8f0; margin-bottom:0;">
+                            <div style="font-size:0.85rem; font-weight:600; color:var(--text-primary); margin-bottom:4px;">
+                                ⚠️ Evidence & Uncertainty Disclosure
+                            </div>
+                            <p style="font-size:0.8rem; color:var(--text-secondary); line-height:1.4;">
+                                Public vendor website claims reflect statements made by vendors and do not constitute independent compliance certification. Items marked <span class="badge badge-conflicting">CONFLICTING</span> or <span class="badge badge-missing">MISSING</span> require human escalation before procurement approval.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: GOVERNANCE & DECISIONS -->
+            <section id="view-governance-decisions" class="main-view">
+                <div class="view-header">
+                    <h1>Governance & Policy Decisions</h1>
+                    <p>Review the 5-Gate evaluation results, policy enforcement reasons, and tool confinement status.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Latest Workflow Gate Evaluation</div>
+                    <div class="gate-card-grid" id="governance-gates-list">
+                        <!-- Rendered dynamically -->
+                        <div class="gate-card passed">
+                            <div class="gate-header">
+                                <span>Gate 1: Access Control</span>
+                                <span class="badge badge-found">Passed</span>
+                            </div>
+                            <div class="gate-details">Role authorization verified.</div>
+                        </div>
+                        <div class="gate-card passed">
+                            <div class="gate-header">
+                                <span>Gate 2: Tool Confinement</span>
+                                <span class="badge badge-found">Passed</span>
+                            </div>
+                            <div class="gate-details">Confined to approved research web navigation.</div>
+                        </div>
+                        <div class="gate-card passed">
+                            <div class="gate-header">
+                                <span>Gate 3: Privacy Gate</span>
+                                <span class="badge badge-found">Passed</span>
+                            </div>
+                            <div class="gate-details">Zero confidential PII detected.</div>
+                        </div>
+                        <div class="gate-card passed">
+                            <div class="gate-header">
+                                <span>Gate 4: Budget Gate</span>
+                                <span class="badge badge-found">Passed</span>
+                            </div>
+                            <div class="gate-details">Allocated 3 queries within budget bounds.</div>
+                        </div>
+                        <div class="gate-card passed">
+                            <div class="gate-header">
+                                <span>Gate 5: Safety Gate</span>
+                                <span class="badge badge-found">Passed</span>
+                            </div>
+                            <div class="gate-details">Tamper-evident audit block registered.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: AUDIT TRAIL -->
+            <section id="view-audit-trail" class="main-view">
+                <div class="view-header">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <h1>Cryptographic Audit Trail</h1>
+                            <p>Tamper-evident SHA-256 hash-chained ledger recording all research actions and gate decisions.</p>
+                        </div>
+                        <button id="btn-verify-audit-chain" class="btn btn-secondary">
+                            🔍 Verify Audit Hash Chain
+                        </button>
+                    </div>
+                </div>
+
+                <div id="chain-verify-result-banner" class="hidden card" style="margin-bottom:1rem; padding:0.75rem 1rem;"></div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>Ledger Blocks</span>
+                        <span id="audit-block-count" class="badge badge-unverified">0 Blocks</span>
+                    </div>
+                    <div class="audit-list" id="audit-blocks-container">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: SETTINGS & POLICIES -->
+            <section id="view-settings-policies" class="main-view">
+                <div class="view-header">
+                    <h1>Settings & Policy Configuration</h1>
+                    <p>Manage supported research constraints, API connections, and governance rules.</p>
+                </div>
+
+                <div class="workspace-grid">
+                    <div class="card">
+                        <div class="card-title">TinyFish Integration Settings</div>
+                        <div class="form-group">
+                            <label class="form-label">TinyFish API Key</label>
+                            <input type="password" id="setting-tinyfish-key" class="form-input" placeholder="sk-tinyfish-••••••••">
+                            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">
+                                Set in your local environment as <code>TINYFISH_API_KEY</code>. If absent, the application gracefully operates in deterministic mock mode.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Provider Mode</label>
+                            <div id="settings-provider-mode-label" style="font-size:13px; font-weight:600; color:var(--text-secondary);">
+                                Simulated / Mock Mode (Active)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Guardian Governance Gates</div>
+                        <div style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+                            <div>✓ <strong>Fail Closed:</strong> Protected operations outside permitted roles are denied.</div>
+                            <div>✓ <strong>SSRF Defense:</strong> Internal loopback, AWS metadata, and LAN IP targets blocked.</div>
+                            <div>✓ <strong>Audit Ledgers:</strong> SHA-256 cryptographic chain validated on demand.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- RAW BLOCK MODAL -->
+    <div id="ledger-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 style="font-size:1rem; font-weight:600;">Cryptographic Block Detail</h3>
+                <button id="close-ledger-modal-btn" class="top-btn" style="font-size:1.2rem;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre id="raw-ledger-json" style="font-family:var(--font-mono); font-size:11px; background:#f8fafc; padding:10px; border-radius:6px; overflow-x:auto;"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/api.js') }}?v=4.0.0"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}?v=4.0.0"></script>
+</body>
+</html>
