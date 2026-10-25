@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: guardian-webops
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    healthCheckPath: /api/research/status
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: PORT
+        value: "10000"
+      - key: FLASK_ENV
+        value: production
+      - key: TINYFISH_API_KEY
+        sync: false   # Set this manually in Render dashboard → Environment → Add Secret
+      - key: SECRET_KEY
+        generateValue: true  # Render auto-generates a secure random value
